@@ -10,19 +10,48 @@
 
 <body>
     <main>
-    <h1>Challenge 2: storing input submissions</h1>
+    <h2>Challenge 2: storing input submissions</h2>
     <p>Loading content from the API: <b id="name">...</b></p>
+
+    &nbsp;
+    <h2>Table</h2>
     <p>The table now contains: </p>
     <p><b id="mytablefruits"> </b></p>
     <p>And each fruit has a color: </p>
     <p><b id="mytablecolors"> </b></p>
+    
+    &nbsp;
+    <h2>Form to add new fruit</h2>
+    <!-- <form action="/action_page.php" method="POST"> -->
+    <!-- <form action="" onsubmit="runCode()">    -->
+    <!-- <form action="./submitmessage.php" method="GET">   -->
+    <form id="wordForm">    
+        <label for="fruitname">Fruit:</label>
+        <input type="text" id="fruitname" name="fruitname"><br>
+
+        <label for="fruitname">Color:</label>
+        <input type="text" id="colorname" name="colorname" value="Color"><br>
+
+        <button type="submit">Submit</button>
+    </form>
+    <p id="status"></p>
+    <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+    <!-- <script src="script.js"></script> -->
+    <!-- <script>
+        function runCode(e) {
+            e.preventDefault();
+            // use axios or fetch to make post request
+        }
+    </script>  -->
     </main>
 
     <script>
+    // test API message 
     (async function() {
         const { text } = await( await fetch(`/api/message`)).json();
         document.querySelector('#name').textContent = text;
     })();
+    // Showing the fruits and colors of database
     (async function() {
         console.log("Fetching fruits of table for the frontend API...")
         const items = await (await fetch(`/api/showtable`)).json();
@@ -31,6 +60,40 @@
         document.querySelector('#mytablecolors').textContent = JSON.stringify(items.Colors);
         // document.querySelector('#mytable').textContent = tabletext.jsonBody;
     })();
+    // Submit form
+    document.getElementById("wordForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const fruitName = document.getElementById("fruitname").value;
+    const colorName = document.getElementById("colorname").value;
+
+    const res = await fetch("/api/SubmitItem", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ "Fruit": fruitName, "Color": colorName })
+    });
+
+    if (res.ok) {
+        document.getElementById("status").textContent = "Saved!";
+    } else {
+        document.getElementById("status").textContent = "Error saving";
+    }
+});
+    // function runCode(e) {
+    //     e.preventDefault();
+    //     const fruitname = document.getElementById("fruitname").value;
+    //     const colorname = document.getElementById("colorname").value;
+    //     console.log("Submitting new fruit to API...")
+    //     console.log(fruitname, colorname)
+    //     fetch(`/api/addfruit`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ fruitname, colorname })
+    //     }).then(res => res.json())()};
     </script>
 </body>
 
