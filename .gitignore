@@ -1,3 +1,6 @@
 node_modules/
 /test-results/
 
+# Manually added
+key1computervision.txt
+
