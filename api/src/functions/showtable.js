@@ -22,12 +22,15 @@ app.http('showtable', {
             items.push(entity);
         }
         const fruits = []
+        const colors = []
         for (let i = 0; i < items.length; i++){
             tablerow = items[i]
             fruit = tablerow.Fruit
+            color = tablerow.Color
             fruits.push(fruit)
+            colors.push(color)
         }
-        return { status: 200, jsonBody: fruits };
+        return { status: 200, jsonBody: {"Fruits": fruits, "Colors": colors}};
 
     }
 });
