@@ -12,13 +12,21 @@
     <main>
     <h1>Challenge 2: storing input submissions</h1>
     <p>Loading content from the API: <b id="name">...</b></p>
+    <p>The table now contains: <b id="mytable"> </b></p>
     </main>
 
     <script>
     (async function() {
         const { text } = await( await fetch(`/api/message`)).json();
         document.querySelector('#name').textContent = text;
-    }());
+    })();
+    (async function() {
+        console.log("Fetching items of table for the frontend API...")
+        const items = await (await fetch(`/api/showtable`)).json();
+        console.log(items)
+        document.querySelector('#mytable').textContent = JSON.stringify(items);
+        // document.querySelector('#mytable').textContent = tabletext.jsonBody;
+    })();
     </script>
 </body>
 
