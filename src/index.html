@@ -9,6 +9,81 @@
 </head>
 
 <body>
+    <h1>Static Web Apps Database Connections</h1>
+    <blockquote>
+        Open the console in the browser developer tools to see the API responses.
+    </blockquote>
+    <div>
+        <button id="list" onclick="list()">List</button>
+        <button id="get" onclick="get()">Get</button>
+        <button id="update" onclick="update()">Update</button>
+        <button id="create" onclick="create()">Create</button>
+        <button id="delete" onclick="del()">Delete</button>
+    </div>
+    <script>
+        async function list() {
+        const endpoint = '/data-api/rest/Person';
+        const response = await fetch(endpoint);
+        const data = await response.json();
+        console.table(data.value);
+        }
+        async function get() {
+        const id = 1;
+        const endpoint = `/data-api/rest/Person/Id`;
+        const response = await fetch(`${endpoint}/${id}`);
+        const result = await response.json();
+        console.table(result.value);
+        }
+        async function update() {
+        const id = 1;
+        const data = {
+            FirstName: "Molly",
+            LastName: "Bianchi",
+            Age: 41
+        };
+
+        const endpoint = '/data-api/rest/Person/Id';
+        const response = await fetch(`${endpoint}/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        console.table(result.value);
+        }
+        async function create() {
+        const id = 5
+        const data = {
+            Id: id,
+            FirstName: "Pedro",
+            LastName: "Camechano",
+            Age: 19
+        };
+        const endpoint = `/data-api/rest/Person/`;
+        const response = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        console.table(result.value);
+        }
+        async function del() {
+        const id = 5;
+        const endpoint = '/data-api/rest/Person/Id';
+        const response = await fetch(`${endpoint}/${id}`, {
+            method: "DELETE"
+        });
+        if(response.ok) {
+            console.log(`Record deleted: ${ id }`)
+        } else {
+            console.log(response);
+        }
+        }
+    </script>
+</body>
+</html>
+<!-- <body>
     <main>
     <h2>Challenge 2: storing input submissions</h2>
     <p>Loading content from the API: <b id="name">...</b></p>
@@ -25,7 +100,7 @@
     <!-- <form action="/action_page.php" method="POST"> -->
     <!-- <form action="" onsubmit="runCode()">    -->
     <!-- <form action="./submitmessage.php" method="GET">   -->
-    <form id="wordForm">    
+    <!-- <form id="wordForm">    
         <label for="fruitname">Fruit:</label>
         <input type="text" id="fruitname" name="fruitname"><br>
 
@@ -35,14 +110,6 @@
         <button type="submit">Submit</button>
     </form>
     <p id="status"></p>
-    <!-- <p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p> -->
-    <!-- <script src="script.js"></script> -->
-    <!-- <script>
-        function runCode(e) {
-            e.preventDefault();
-            // use axios or fetch to make post request
-        }
-    </script>  -->
     </main>
 
     <script>
@@ -97,4 +164,4 @@
     </script>
 </body>
 
-</html>
+</html> --> 

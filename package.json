@@ -5,6 +5,7 @@
     "start": "sirv ./src public --cors --single --no-clear --port 8000"
   },
   "dependencies": {
-    "@azure/data-tables": "^13.3.2"
+    "@azure/data-tables": "^13.3.2",
+    "mssql": "^12.2.0"
   }
 }
