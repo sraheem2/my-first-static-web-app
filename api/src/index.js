@@ -83,11 +83,12 @@ app.http('UpdatePerson', {
 });
 
 // DELETE /api/DeletePerson?id=1
-app.http('DeletePerson', {
+app.http('DeletePerson5', {
     methods: ['DELETE'],
     authLevel: 'anonymous',
     handler: async (req, ctx) => {
-        const id = req.query.id;
+        id=5
+        // const id = req.query.id;
         if (!id) return { status: 400, jsonBody: { error: 'Missing id' } };
         try {
             await getConnection();
