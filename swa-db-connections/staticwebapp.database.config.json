@@ -37,10 +37,6 @@
           "role": "anonymous"
         }
       ]
-    },
-    "TestEnv": {
-      "source": "dbo.Person",
-      "permissions": [{"actions":["*"], "role":"anonymous"}]
     }
   }
 }
