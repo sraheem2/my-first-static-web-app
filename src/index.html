@@ -17,46 +17,47 @@
     <div>
         <button id="list" onclick="list()">List</button>
         <button id="get" onclick="get()">Get</button>
-        <button id="update" onclick="update()">Update</button>
+        <!-- <button id="update" onclick="update()">Update</button> -->
         <button id="create" onclick="create()">Create</button>
         <button id="delete" onclick="del()">Delete</button>
     </div>
     <script>
-        // (async function() {
-        // const { text } = await( await fetch(`/api/message`)).json();
-        // document.querySelector('#name').textContent = text;
-        // })();
         async function list() {
-        // console.log(process.env.SQL_CONNECTION_STRING);
-        const endpoint = '/data-api/rest/Person';
+        // const endpoint = '/data-api/rest/Person';
+        const endpoint = '/api/listPeople'
         const response = await fetch(endpoint);
         const data = await response.json();
-        console.table(data.value);
+        console.table(data);
+        // console.table(data.value) was used for DAB
         }
+
         async function get() {
         const id = 1;
-        const endpoint = `/data-api/rest/Person/Id`;
-        const response = await fetch(`${endpoint}/${id}`);
+        // const endpoint = `/data-api/rest/Person/Id`;
+        const endpoint = `/api/GetPerson1`
+        // const response = await fetch(`${endpoint}/${id}`);
+        const response = await fetch(endpoint);
         const result = await response.json();
-        console.table(result.value);
+        console.table(result);
         }
-        async function update() {
-        const id = 1;
-        const data = {
-            FirstName: "Molly",
-            LastName: "Bianchi",
-            Age: 41
-        };
 
-        const endpoint = '/data-api/rest/Person/Id';
-        const response = await fetch(`${endpoint}/${id}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        });
-        const result = await response.json();
-        console.table(result.value);
-        }
+        // async function update() {
+        // const id = 1;
+        // const data = {
+        //     FirstName: "Molly",
+        //     LastName: "Bianchi",
+        //     Age: 41
+        // };
+        // const endpoint = '/data-api/rest/Person/Id';
+        // const response = await fetch(`${endpoint}/${id}`, {
+        //     method: "PUT",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify(data)
+        // });
+        // const result = await response.json();
+        // console.table(result.value);
+        // }
+
         async function create() {
         const id = 5
         const data = {
@@ -65,19 +66,23 @@
             LastName: "Camechano",
             Age: 19
         };
-        const endpoint = `/data-api/rest/Person/`;
+        // const endpoint = `/data-api/rest/Person/`;
+        const endpoint = '/api/CreatePerson';
         const response = await fetch(endpoint, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
         const result = await response.json();
-        console.table(result.value);
+        console.table(result);
         }
+
         async function del() {
         const id = 5;
-        const endpoint = '/data-api/rest/Person/Id';
-        const response = await fetch(`${endpoint}/${id}`, {
+        // const endpoint = '/data-api/rest/Person/Id';
+        // const endpoint = `/api/DeletePerson?id=${id}`;
+        const endpoint = 'api/DeletePerson5'
+        const response = await fetch(endpoint, {
             method: "DELETE"
         });
         if(response.ok) {
