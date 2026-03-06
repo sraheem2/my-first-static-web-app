@@ -4,4 +4,4 @@ node_modules/
 # Manually added
 key1computervision.txt
 connstringSQL.txt
-
+.env

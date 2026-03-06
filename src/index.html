@@ -10,6 +10,7 @@
 
 <body>
     <h1>Static Web Apps Database Connections</h1>
+    <!-- <p>Loading content from the API: <b id="name">...</b></p> -->
     <blockquote>
         Open the console in the browser developer tools to see the API responses.
     </blockquote>
@@ -21,7 +22,12 @@
         <button id="delete" onclick="del()">Delete</button>
     </div>
     <script>
+        // (async function() {
+        // const { text } = await( await fetch(`/api/message`)).json();
+        // document.querySelector('#name').textContent = text;
+        // })();
         async function list() {
+        // console.log(process.env.SQL_CONNECTION_STRING);
         const endpoint = '/data-api/rest/Person';
         const response = await fetch(endpoint);
         const data = await response.json();
