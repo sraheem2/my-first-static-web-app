@@ -100,6 +100,19 @@ app.http('DeletePerson5', {
     }
 });
 
+app.http('TestConnection', {
+  methods: ['GET'],
+  authLevel: 'anonymous',
+  handler: async (req, ctx) => {
+    try {
+      await sql.connect(process.env.SQL_CONNECTION_STRING);
+      return { status: 200, jsonBody: { success: true, message: 'Connected!' } };
+    } catch (err) {
+      return { status: 500, jsonBody: { success: false, error: err.message } };
+    }
+  }
+});
+
 // module.exports = async function (context, req) {
 //     const connStr = process.env.SQL_CONNECTION_STRING; 
 //     try {
